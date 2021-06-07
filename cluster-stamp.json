@@ -107,7 +107,7 @@
         "virtualMachineContributorRole": "[concat(subscription().Id, '/providers/Microsoft.Authorization/roleDefinitions/9980e02c-c2be-4d73-94e8-173b1dc7cf3c')]",
         "readerRole": "[concat(subscription().Id, '/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7')]",
 
-        "subRgUniqueString": "[uniqueString('aks', subscription().subscriptionId, resourceGroup().id)]",
+        "subRgUniqueString": "[uniqueString('akscl', subscription().subscriptionId, resourceGroup().id)]",
 
         "nodeResourceGroupName": "[concat('rg-', variables('clusterName'), '-nodepools')]",
         "clusterName": "[concat('aks-', variables('subRgUniqueString'))]",
@@ -332,7 +332,7 @@
                 }
             ]
         },
-{
+        {
             "type": "Microsoft.Network/privateDnsZones",
             "apiVersion": "2020-06-01",
             "name": "[variables('acrPrivateDnsZonesName')]",
@@ -1140,7 +1140,7 @@
                     "authorizedIPRanges": "[parameters('clusterAuthorizedIPRanges')]",
                     "enablePrivateCluster": false
                 },
-                "podIdentityProfile": { 
+                "podIdentityProfile": {
                     "enabled": false, /* This feature is currently in preview and will eventually replace the aad-pod-identity configuration set up by hand in this reference implementation */
                     "userAssignedIdentities": [],
                     "userAssignedIdentityExceptions": []
