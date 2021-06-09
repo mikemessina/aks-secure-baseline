@@ -20,7 +20,10 @@ kubectl auth can-i create namespace -A
 
 kubectl create namespace cluster-baseline-settings
 
+kubectl delete -f https://raw.githubusercontent.com/mspnp/aks-secure-baseline/main/cluster-manifests/cluster-baseline-settings/flux.yaml
 kubectl create -f https://raw.githubusercontent.com/mspnp/aks-secure-baseline/main/cluster-manifests/cluster-baseline-settings/flux.yaml
+
+kubectl create -f flux.yaml
 
 kubectl wait -n cluster-baseline-settings --for=condition=ready pod --selector=app.kubernetes.io/name=flux --timeout=90s
 
@@ -95,11 +98,13 @@ ACR_NAME=$(az deployment group show -g $RESOURCE_GROUP_NAME -n cluster-stamp1 --
 az acr import --source docker.io/library/traefik:v2.4.8 -n $ACR_NAME
 
 # kubectl delete -f https://raw.githubusercontent.com/mspnp/aks-secure-baseline/main/workload/traefik.yaml
-kubectl create -f https://raw.githubusercontent.com/mspnp/aks-secure-baseline/main/workload/traefik.yaml
+# kubectl create -f https://raw.githubusercontent.com/mspnp/aks-secure-baseline/main/workload/traefik.yaml
+kubectl create -f traefik.yaml
 
 kubectl wait -n a0008 --for=condition=ready pod --selector=app.kubernetes.io/name=traefik-ingress-ilb --timeout=90s
 
 kubectl create -f https://raw.githubusercontent.com/mspnp/aks-secure-baseline/main/workload/aspnetapp.yaml
+# kubectl delete -f https://raw.githubusercontent.com/mspnp/aks-secure-baseline/main/workload/aspnetapp.yaml
 
 kubectl wait -n a0008 --for=condition=ready pod --selector=app.kubernetes.io/name=aspnetapp --timeout=90s
 
