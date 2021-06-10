@@ -19,9 +19,10 @@ az acr import --source docker.io/weaveworks/kured:1.6.1 -n $ACR_NAME
 kubectl auth can-i create namespace -A
 
 kubectl create namespace cluster-baseline-settings
+kubectl create namespace a0008
 
-kubectl delete -f https://raw.githubusercontent.com/mspnp/aks-secure-baseline/main/cluster-manifests/cluster-baseline-settings/flux.yaml
-kubectl create -f https://raw.githubusercontent.com/mspnp/aks-secure-baseline/main/cluster-manifests/cluster-baseline-settings/flux.yaml
+# kubectl delete -f https://raw.githubusercontent.com/mspnp/aks-secure-baseline/main/cluster-manifests/cluster-baseline-settings/flux.yaml
+# kubectl create -f https://raw.githubusercontent.com/mspnp/aks-secure-baseline/main/cluster-manifests/cluster-baseline-settings/flux.yaml
 
 kubectl create -f flux.yaml
 

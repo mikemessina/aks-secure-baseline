@@ -62,7 +62,10 @@ az group create --name ACE-P-LAB-AKS-RGP-07-005 --location eastus2
 RESOURCEID_VNET_CLUSTERSPOKE=$(az deployment group show -g ACE-P-LAB-AKS-RGP-07-003 -n spoke-BU0001A0008 --query properties.outputs.clusterVnetResourceId.value -o tsv)
 
 # [This takes about 15 minutes.]
-az deployment group create -g ACE-P-LAB-AKS-RGP-07-005 -f cluster-stamp1.json -p targetVnetResourceId=${RESOURCEID_VNET_CLUSTERSPOKE} clusterAdminAadGroupObjectId=${AADOBJECTID_GROUP_CLUSTERADMIN} k8sControlPlaneAuthorizationTenantId=${TENANTID_K8SRBAC} appGatewayListenerCertificate=${APP_GATEWAY_LISTENER_CERTIFICATE} aksIngressControllerCertificate=${AKS_INGRESS_CONTROLLER_CERTIFICATE_BASE64}
+# az deployment group create -g ACE-P-LAB-AKS-RGP-07-005 -f cluster-stamp.json -p targetVnetResourceId=${RESOURCEID_VNET_CLUSTERSPOKE} clusterAdminAadGroupObjectId=${AADOBJECTID_GROUP_CLUSTERADMIN} k8sControlPlaneAuthorizationTenantId=${TENANTID_K8SRBAC} appGatewayListenerCertificate=${APP_GATEWAY_LISTENER_CERTIFICATE} aksIngressControllerCertificate=${AKS_INGRESS_CONTROLLER_CERTIFICATE_BASE64}
+# az deployment group create -g ACE-P-LAB-AKS-RGP-07-005 -f cluster-stamp1.json -p targetVnetResourceId=${RESOURCEID_VNET_CLUSTERSPOKE} clusterAdminAadGroupObjectId=${AADOBJECTID_GROUP_CLUSTERADMIN} k8sControlPlaneAuthorizationTenantId=${TENANTID_K8SRBAC}
+
+az deployment group create -g ACE-P-LAB-AKS-RGP-07-005 -f cluster-stamp.json -p azuredeploy.parameters.prod.json
 
 # # Create an Azure Service Principal
 # az ad sp create-for-rbac --name "github-workflow-aks-cluster" --sdk-auth --skip-assignment >sp.json
